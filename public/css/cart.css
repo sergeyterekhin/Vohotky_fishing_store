@@ -1,0 +1,247 @@
+@media all {
+    @media all and (max-width: 640px) {
+        body form.forms div.item {
+            margin-top: 8px;
+        }
+
+        body #content h1 {
+            font-size: 26px;
+            line-height: 26px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            padding-right: 24px;
+        }
+
+        body #shopping_cart_table .features {
+            display: none;
+        }
+    }
+
+    @media all and (max-width: 480px) {
+        body #shopping_cart_table .img {
+            display: none;
+        }
+    }
+}
+
+form.forms div.item {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+    min-height: 30px;
+}
+
+form.forms p {
+    font-size: 14px;
+    color: #333;
+}
+
+form.forms input[type=submit] {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 7px 14px 8px 14px;
+    border-width: 0;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    cursor: pointer;
+    background-color: #333e48;
+    outline: none;
+    text-decoration: none;
+    border-width: 0;
+    -webkit-appearance: none;
+    transition: background-color 0.3s;
+}
+
+form.forms input[type=submit]:hover {
+    background-color: #0062bd;
+}
+
+form.forms input[type=submit]:active {
+    background-color: #000;
+}
+
+#shopping_cart_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#shopping_cart_table th {
+    text-align: center;
+    border-bottom: 2px solid #1e73be;
+    padding: 2px;
+}
+
+#shopping_cart_table td {
+    border-bottom: 1px solid #1e73be;
+    padding: 2px;
+    text-align: center;
+    width: 16%;
+}
+
+#shopping_cart_table img {
+    width: 100px;
+}
+
+#shopping_cart_table .features {
+    font-size: 14px;
+}
+/* ============================= */
+#shopping_cart_table .features div.item {
+    text-align: left;
+}
+
+#shopping_cart_table .features .item span {
+font-weight: bold;
+}
+
+#shopping_cart_table .features li {
+    list-style-type: none;
+    margin-left: 25%;
+}
+/* ========================= */
+#shopping_cart_table .digit {
+    width: 10%;
+    text-align: right;
+    word-break: break-all;
+}
+
+#shopping_cart_table .noline {
+    border-width: 0;
+}
+
+#shopping_cart_table .img {
+    width: 5%;
+    max-width: 104px;
+}
+
+#shopping_cart_table .qt p {
+    float: left;
+    width: 48px;
+    height: 29px;
+    border: 1px solid #333e48;
+    border-left-width: 0;
+    border-right-width: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+    line-height: 28px;
+    color: #666;
+    background-color: #fff;
+}
+
+#shopping_cart_table a.del {
+    display: block;
+    position: relative;
+    width: 60px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#shopping_cart_table .decr, #shopping_cart_table .incr {
+    display: block;
+    float: left;
+    width: 26px;
+    height: 31px;
+    background-color: #333e48;
+    text-align: center;
+    line-height: 14px;
+    color: #fff;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#shopping_cart_table .decr {
+    border-radius: 5px 0px 0px 5px;
+}
+
+#shopping_cart_table .incr {
+    border-radius: 0px 5px 5px 0px;
+}
+
+#shopping_cart_table .decr:hover:not(:disabled), #shopping_cart_table .incr:hover:not(:disabled) {
+    background-color: #1e73be;
+    color: #fff;
+}
+
+#shopping_cart_table div.buttons {
+    position: relative;
+    text-align: center;
+}
+
+#shopping_cart_table div.qt {
+    display: block;
+    float: none;
+    height: 34px;
+    width: 100px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#errorTextFormOrdering {
+    padding-top: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+/*  */
+
+.form_toggle {
+	display: inline-block;
+	overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+}
+.form_toggle-item {
+	float: left;
+	display: inline-block;
+}
+
+.form_toggle p{
+color:#666;
+}
+
+.form_toggle-item input[type=radio] {
+	display: none;
+}
+.form_toggle-item label {
+	display: inline-block;
+	padding: 0px 15px;   
+	line-height: 34px;    
+	border: 1px solid #999;
+	border-right: none;
+	cursor: pointer;
+	user-select: none;   
+}
+ 
+.form_toggle .item-1 label {
+	border-radius: 6px 0 0 6px;
+}
+.form_toggle .item-2 label {
+	border-radius: 0 6px 6px 0;
+	border-right: 1px solid #999;
+}
+ 
+/* Checked */
+.form_toggle input[type=radio]:checked + label {
+	background: #bbffbb;
+}
+
+.contain {
+    width: 100%;
+}
+
+.contain .form_toggle:nth-child(1) {
+   float:left;
+}
+
+.contain .forms:nth-child(2) {
+   float:right;
+}
