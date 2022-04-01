@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
+import admin from "./admin";
 import auth from './auth';
 import product from './product';
 import category from './category';
@@ -14,5 +14,6 @@ export default new Vuex.Store({
         product,
         category,
         cart,
+        admin
     }
 });

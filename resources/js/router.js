@@ -84,11 +84,26 @@ const routes=[
         component: () => import('./views/products_shop/pageproductid.vue')
     },
     {
+        path:"/admin",
+        name: 'Admin',
+        meta:{isAdmin:true},
+        component: () => import('./views/admin/Main.vue'),
+        children:[
+            {
+                path:'user',
+                name:'allUsers',
+                component: () => import('./views/admin/User/allUsers.vue'),
+            },
+            
+        ]
+    },
+    {
         path:"/:pathMatch(.*)*",
         name: 'PageNotFound',
         alias: '*',
         component: () => import('./views/pagenotfound.vue')
-    }
+    },
+    
 ];
 
 
@@ -99,21 +114,26 @@ routes
 });
 
 router.beforeEach((to, from, next) => {
-    console.log("work beforeEach");
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        console.log("work requiresAuth");
     if (!store.getters['auth/authenticated']) {
        next({name:'auth'})
       } 
     } 
 
     if (to.matched.some(record => record.meta.requiresNoAuth)) {
-        console.log("work requiresNoAuth");
     if (store.getters['auth/authenticated']) {
        next({name:'Home'})
       } 
     }
-      next()
+
+    if (to.matched.some(record => record.meta.isAdmin)) {
+        if (store.getters['auth/role']!="admin") {
+            return redirect({name:'Home'});
+          } 
+        }
+
+
+    next()
     
   })
 

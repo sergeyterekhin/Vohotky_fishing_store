@@ -17,6 +17,7 @@
                         </ul>
                         <ul v-else>
                             <li><strong>{{user.name}}</strong> <i class="fa-regular fa-user"></i></li>
+                            <li v-if="role=='admin'"><a href="/admin">Админка</a> <i class="fa-solid fa-pen-to-square"></i></li>
                             <li><router-link to="/profile">Профиль</router-link> <i class="fa-regular fa-address-card"></i></li>
                             <li><router-link to="/">История</router-link> <i class="fa-solid fa-list-check"></i></li>
                             <li><a href="#" @click.prevent="signOut">Выйти</a> <i class="fa-solid fa-arrow-right-from-bracket"></i></li>
@@ -69,7 +70,8 @@ export default {
     computed:{
         ...mapGetters({
           authenticated: 'auth/authenticated',
-          user: 'auth/user',  
+          user: 'auth/user',
+          role: 'auth/role'  
         })
     }
 }

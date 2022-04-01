@@ -3,7 +3,9 @@ require('./modal');
 window.Vue = require('vue').default;
 
 Vue.component('header-component', require('./components/Header.vue').default);
+Vue.component('headera-component', require('./components/admin/Header.vue').default);
 Vue.component('categorybar-component', require('./components/Categorybar.vue').default);
+Vue.component('navbar-component', require('./components/admin/Navbar.vue').default);
 Vue.component('footer-component', require('./components/Footer.vue').default);
 
 import router from './router';

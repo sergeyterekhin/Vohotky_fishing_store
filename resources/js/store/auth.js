@@ -5,6 +5,7 @@ export default {
     state: {
         token: null,
         user: null,
+        role: null,
         changepassword: null,
     },
 
@@ -14,6 +15,9 @@ export default {
         },
         setUser(state, data) {
             state.user = data;
+        },
+        setRole(state,data){
+            state.role=data;
         },
         setChangePassword(state,data){
           state.changepassword=data;  
@@ -75,15 +79,18 @@ export default {
             }
             try {
                 let responce = await axios.get('/api/auth/me')
-                commit('setUser', responce.data)
+                commit('setUser', responce.data.user)
+                commit('setRole',responce.data.role)
             } catch (e) {
                 commit('setUser', null)
+                commit('setRole',null)
                 commit('setToken', null);
             }
         },
         signOut({commit}){
             return axios.post('api/auth/signout').then(()=>{
                 commit('setUser', null)
+                commit('setRole',null)
                 commit('setToken', null);  
             })
         }
@@ -97,6 +104,9 @@ export default {
         },
         status(state){
             return state.changepassword
+        },
+        role(state){
+            return state.role
         }
     }
 }

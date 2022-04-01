@@ -15,10 +15,11 @@ class MeController extends Controller
     {
         $user=$request->user();
         return response()->json([
-            'email' => $user->email,
+            'user'=>['email' => $user->email,
             'name' => $user->name,
             'id' => $user->id,
-            'phone' => $user->phone
+            'phone' => $user->phone],
+            'role' => $user->role
         ]);
     }
 }
