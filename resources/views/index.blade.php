@@ -28,7 +28,7 @@
 </section>
 <footer-component></footer-component>
 </div>
-<script src="{{asset('./js/app.js')}}"></script>
+<script src="{{mix('/js/app_user.js')}}"></script>
 <script src="https://kit.fontawesome.com/e14fdf4ee2.js" crossorigin="anonymous"></script>
 </body>
 

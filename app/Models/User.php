@@ -55,7 +55,7 @@ class User extends Authenticatable implements JWTSubject
     }
     
     public function getVerficatedStatus($email){
-    $verficated=User::where('email','=',$email)->select('verficated')->first();
+    $verficated=User::where('email','=',$email)->select('verficated','verfication_code')->first();
     if ($verficated['verficated']=="true") return true; else return false;
     }
 }

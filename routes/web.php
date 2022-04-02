@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin{any}',function(){
+Route::get('/adminVohotky{any}',function(){
     return view('admin');
 })->where('any','.*');
 

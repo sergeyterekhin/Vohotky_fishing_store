@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -12,12 +12,10 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-<headera-component></headera-component>
-<navbar-component></navbar-component>
+<div id="app2">
 <router-view></router-view>
 </div>
-    <script src="{{ asset('./js/app.js') }}"></script>
+    <script src="{{ mix('/js/app_admin.js') }}"></script>
     <script src="{{ asset('assets/materialize/js/materialize.js') }}"></script>
     <script src="{{ asset('assets/materialize/js/materialize.min.js') }}"></script>
 </body>
