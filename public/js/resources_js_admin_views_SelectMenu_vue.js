@@ -177,7 +177,7 @@ var render = function () {
                 _c(
                   "router-link",
                   {
-                    staticClass: "waves-effect light-blue darken-3 btn-large",
+                    staticClass: " light-blue darken-3 btn-large",
                     attrs: { to: "/adminVohotky/user" },
                   },
                   [_vm._v("Все")]
@@ -186,8 +186,8 @@ var render = function () {
                 _c(
                   "router-link",
                   {
-                    staticClass: "waves-effect light-blue darken-3 btn-large",
-                    attrs: { to: "/adminVohotky/user" },
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/user?sort=verificated" },
                   },
                   [_vm._v("Верифицированные")]
                 ),
@@ -195,8 +195,8 @@ var render = function () {
                 _c(
                   "router-link",
                   {
-                    staticClass: "waves-effect light-blue darken-3 btn-large",
-                    attrs: { to: "/adminVohotky/user" },
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/user?sort=noverificated" },
                   },
                   [_vm._v("Не Верифицированные")]
                 ),
@@ -205,13 +205,139 @@ var render = function () {
             ),
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "card " }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-action  center" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/category" },
+                  },
+                  [_vm._v("Посмотреть все категории")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/add/category" },
+                  },
+                  [_vm._v("Создать новую")]
+                ),
+              ],
+              1
+            ),
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "card " }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-action  center" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/products" },
+                  },
+                  [_vm._v("Просмотр товаров сайта")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/add/products" },
+                  },
+                  [_vm._v("Добавить товар")]
+                ),
+              ],
+              1
+            ),
+          ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("div", { staticClass: "card " }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-action  center" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/info/about" },
+                  },
+                  [_vm._v("О компании")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/info/deliveryandpay" },
+                  },
+                  [_vm._v("Оплата и доставка")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/info/contact" },
+                  },
+                  [_vm._v("Контакты")]
+                ),
+              ],
+              1
+            ),
+          ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "card " }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-action  center" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/orders?status=new" },
+                  },
+                  [_vm._v("Необработанные заказы")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/orders?status=ready" },
+                  },
+                  [_vm._v("Ожидают покупателя")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: " light-blue darken-3 btn-large",
+                    attrs: { to: "/adminVohotky/orders?status=elder" },
+                  },
+                  [_vm._v("Завершенные заказы")]
+                ),
+              ],
+              1
+            ),
+          ]),
         ]),
       ]),
       _vm._v(" "),
@@ -239,36 +365,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card " }, [
-      _c("div", { staticClass: "card-content center" }, [
-        _c("span", { staticClass: "card-title" }, [
-          _vm._v("Категории товаров"),
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            'В данном разделе можно добавить новую категорию. Данная категория появится на сайте и можно будет задать её товарам в разделе "Товары"'
-          ),
-        ]),
-      ]),
+    return _c("div", { staticClass: "card-content center" }, [
+      _c("span", { staticClass: "card-title" }, [_vm._v("Категории товаров")]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-action  center" }, [
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Просмотр всех")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Создать новую")]
+      _c("p", [
+        _vm._v(
+          'В данном разделе можно добавить новую категорию. Данная категория появится на сайте и можно будет задать её товарам в разделе "Товары"'
         ),
       ]),
     ])
@@ -277,43 +379,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card " }, [
-      _c("div", { staticClass: "card-content center" }, [
-        _c("span", { staticClass: "card-title" }, [_vm._v("Товары")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            'В данном разделе можно добавить новые товары или удалить старые. Если новому товару нужна новая категория, следует её добавить в разделе "Категории товаров"'
-          ),
-        ]),
-      ]),
+    return _c("div", { staticClass: "card-content center" }, [
+      _c("span", { staticClass: "card-title" }, [_vm._v("Товары")]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-action  center" }, [
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Все")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Верифицированные")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Не верифицированные")]
+      _c("p", [
+        _vm._v(
+          'В данном разделе можно добавить новые товары или удалить старые. Если новому товару нужна новая категория, следует её добавить в разделе "Категории товаров"'
         ),
       ]),
     ])
@@ -322,43 +393,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card " }, [
-      _c("div", { staticClass: "card-content center" }, [
-        _c("span", { staticClass: "card-title" }, [_vm._v("Данные сайта")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            'В данном разделе можно изменить содержимое вкладок сайта "О компании", "Оплата и доставка", "Контакты"'
-          ),
-        ]),
-      ]),
+    return _c("div", { staticClass: "card-content center" }, [
+      _c("span", { staticClass: "card-title" }, [_vm._v("Данные сайта")]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-action  center" }, [
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("О компании")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Оплата и доставка")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Контакты")]
+      _c("p", [
+        _vm._v(
+          'В данном разделе можно изменить содержимое вкладок сайта "О компании", "Оплата и доставка", "Контакты"'
         ),
       ]),
     ])
@@ -367,34 +407,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card " }, [
-      _c("div", { staticClass: "card-content center" }, [
-        _c("span", { staticClass: "card-title" }, [_vm._v("Заказы")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "В данном разделе можно смотреть поступившие заказы от пользователей."
-          ),
-        ]),
-      ]),
+    return _c("div", { staticClass: "card-content center" }, [
+      _c("span", { staticClass: "card-title" }, [_vm._v("Заказы")]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-action  center" }, [
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Новые заказы")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "waves-effect light-blue darken-3 btn-large",
-            attrs: { href: "#" },
-          },
-          [_vm._v("Старые заказы")]
+      _c("p", [
+        _vm._v(
+          "В данном разделе можно смотреть поступившие заказы от пользователей."
         ),
       ]),
     ])

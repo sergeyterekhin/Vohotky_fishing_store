@@ -47,6 +47,7 @@ class ConfirmEmailController extends Controller
         $data = [
             'name' => $user->name,
             'verification_code' => $user->verfication_code,
+            'url' => env('MIX_APP_URL')
         ];
         Mail::to($user->email)->send(new RememberPassword($data));
         return response()->json([
@@ -87,7 +88,7 @@ class ConfirmEmailController extends Controller
     public function changeUserData(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
-            'phone' => 'required|min:11|max:11|regex:/(8)[0-9]{10}/',
+            'phone' => 'required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,11}(\s*)?$/',
     ]);
     //Если не прошло валидацию (Нужно узнать точную ошибку http)
     if ($validator->fails()){

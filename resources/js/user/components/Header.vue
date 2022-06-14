@@ -1,6 +1,7 @@
 <template>
 <header>
-    <div class="pcformat">
+    <v-mobile :isAuth="authenticated" />
+    <nav id="pc_nav">
         <div class="top">
             <div class="container">
                 <div class="container">
@@ -19,7 +20,7 @@
                             <li><strong>{{user.name}}</strong> <i class="fa-regular fa-user"></i></li>
                             <li v-if="role=='admin'"><a href="/adminVohotky">Админка</a> <i class="fa-solid fa-pen-to-square"></i></li>
                             <li><router-link to="/profile">Профиль</router-link> <i class="fa-regular fa-address-card"></i></li>
-                            <li><router-link to="/">История</router-link> <i class="fa-solid fa-list-check"></i></li>
+                            <li><router-link to="/history">История</router-link> <i class="fa-solid fa-list-check"></i></li>
                             <li><a href="#" @click.prevent="signOut">Выйти</a> <i class="fa-solid fa-arrow-right-from-bracket"></i></li>
                         </ul>
                     </nav>
@@ -42,7 +43,7 @@
             </div>
             </div>
         </div>
-    </div>    
+    </nav>    
     </header>
 </template>
 
@@ -50,12 +51,13 @@
 import Cart from './header_block/Cart.vue';
 import Search from './header_block/SearchCatalog.vue';
 import Navigation from './header_block/Navigation.vue';
+import VMobile from './MHeader.vue';
 import { mapActions,mapGetters } from 'vuex'
 
 export default {
     name: "Header",
     components:{
-        Cart, Search, Navigation
+        Cart, Search, Navigation,VMobile
     },
     methods:{
         ...mapActions({
@@ -72,7 +74,7 @@ export default {
           authenticated: 'auth/authenticated',
           user: 'auth/user',
           role: 'auth/role'  
-        })
+        }),
     }
 }
 </script>

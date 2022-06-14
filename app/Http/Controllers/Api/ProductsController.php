@@ -8,41 +8,39 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+
+    public function RandomProduct(Request $request){
+        $array=[];
+        if($request->has('quantity')) $quantity=$request->quantity; else $quantity=1;
+        for ($i=0; $i < $quantity; $i++) { 
+            $result=Products::join('category','products.category_id','=','category.id')
+            ->orderByRaw("RAND()")
+            ->select('products.*','category.name_ru','category.name_en')->limit(4)->get();
+            array_push($array,['data'=>$result]);
+        }
+        return response()->json($array);
+    }
+
+    public function newProducts(Request $request)
     {
         $result=Products::join('category','products.category_id','=','category.id')
-        ->select('products.*','category.name_ru','category.name_en')->orderBy('created_at','desc');
+        ->select('products.*','category.name_ru','category.name_en')
+        ->orderBy('created_at','desc');
+        if ($result->get()->count() <= 0){
+            return response()->json([
+                'message'=> "Not found"
+            ],404);    
+        }
         if ($request->has('limit')){
             $result=$result->limit($request->input('limit'));
-        }
+        }else {$result=$result->limit(8);}
+        $header='Новинки';
         return response()->json([
-            'products'=> $result->get()
+            'products'=> ['data' => $result->get()],
+            'header'=>$header
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @param  int  $сategory
-     * @return \Illuminate\Http\Response
-     */
     public function showOne($category,$id){
     $result=Products::where('name_url','=',$id)->get();
     if ($result->count() <= 0){
@@ -56,25 +54,48 @@ class ProductsController extends Controller
     ->select('products.*','category.name_ru','category.name_en')->limit(4)->get();
 
     return response()->json([
-        'product'=> $result,
-        'other' => $result2
+        'data' => $result2,
+        'product' => $result,
     ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id,Request $request)
-    {
-        if ($id=="news"){
-        $result=Products::join('category','products.category_id','=','category.id')
-        ->select('products.*','category.name_ru','category.name_en')->limit(6)->orderBy('created_at','desc');
+
+    public function showSearch(Request $request){
+        $array=explode(" ",$request->search);
+        $search=[];
+        foreach ($array as $value) {
+        array_push($search,"name like '%{$value}%'");
         }
-        else
-        {
+        $search=implode(" and ", $search);
+        $result=Products::join('category','products.category_id','=','category.id')
+        ->whereRaw($search)
+        ->select('products.*','category.name_ru','category.name_en');
+              
+              if ($result->get()->count() <= 0)
+                return response()->json([
+                    'message'=> "Not found",
+                    'products' => null,
+                    'header'=>'Результаты поиска по запросу "'.$request->search.'"'
+                ],400); 
+
+        if($request->has('sort')){
+            switch ($request->input('sort')){
+                case 'nameup': $result=$result->orderBy('name','asc'); break;
+                case 'namedown': $result=$result->orderBy('name','desc'); break;
+                case 'priceup': $result=$result->orderBy('price','asc'); break;
+                case 'pricedown': $result=$result->orderBy('price','desc'); break;
+                case 'news': $result=$result->orderBy('created_at','desc'); break;
+                default: break;
+            }
+        }
+        return response()->json([
+            'products'=> $result->paginate(12),
+            'header'=>'Результаты поиска по запросу "'.$request->search.'"'
+        ],200); 
+    }
+
+     public function show($id,Request $request)
+    {
         $result=Products::
         join('category','products.category_id','=','category.id')
         ->where('category.name_en','=',$id)
@@ -89,37 +110,17 @@ class ProductsController extends Controller
                 default: break;
             }
         }
-    }
         if ($result->get()->count() <= 0){
             return response()->json([
                 'message'=> "Not found"
             ],404);    
         }
+
+        $header=$result->first();
+        $header=$header->name_ru;
         return response()->json([
-            'products'=> $result->paginate(5),
+            'products'=> $result->paginate(12),
+            'header'=>$header
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

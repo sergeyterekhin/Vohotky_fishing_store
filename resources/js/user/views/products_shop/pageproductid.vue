@@ -1,12 +1,17 @@
 <template>
   <main>
+    <spin-loading v-if="flag"></spin-loading>
+    <div v-else id="contentPage">
     <div v-for="product in getProduct.product" :key="product.id">
       <h1>{{ product.name }}</h1>
       <div id="shop_goods">
         <div class="goods-card">
           <div class="gallery">
             <div class="middle">
-              <img :src="product.image_name" />
+              <img @click="product.image_name!=null ? toggler = !toggler : []" :src="product.image_name==null ?
+               '/storage/products/none.png' :
+               `/storage/products/${product.image_name}`"/>
+            <FsLightbox :toggler="toggler" :sources="[`/storage/products/${product.image_name}`]"  />
             </div>
           </div>
           <div class="right">
@@ -58,29 +63,34 @@
         </div>
       </div>
     </div>
-    <section class="goods_set">
+    <section class="goods_set" v-if="getProduct.data.length>0">
       <h4>Похожие товары</h4>
-      <News :getProductsNew="getProduct.other" />
+      <News :getProductsNew="getProduct" />
     </section>
+  </div>
   </main>
 </template>
 <script>
 import News from "../../components/product_block/News.vue";
+import SpinLoading from '../../components/SpinSite.vue'
 import router from "../../router";
+import FsLightbox from "fslightbox-vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "pageproduct",
   components: {
-    News,
+    News,SpinLoading,FsLightbox
   },
   data() {
     return {
       countproduct: 1,
+      flag:true,
+      toggler:false
     };
   },
   mounted() {
-    this.getProducts(this.$route.params);
+    this.getProducts(this.$route.params).then(() =>{this.flag=false;});
   },
   computed: {
     ...mapGetters({
@@ -104,10 +114,6 @@ export default {
     },
     
     AddToCart(product) {
-      var modal = $modal({
-        title: "Добавлен в корзину",
-        content: `<p>Товар <strong>${product.name}</strong> Добавлен</p>`,
-      });
       if(this.countproduct<1) this.countproduct=1; else if(this.countproduct>5) this.countproduct=5;
       var dataAdded = {
         id: product.id,
@@ -115,7 +121,7 @@ export default {
       };
       this.addToCartuser(dataAdded).then(() => {
           this.countproduct=1;
-      modal.showTime();
+       this.$notify({title: 'Товар добавлен!', text: `<b>${product.name}</b> добавлен в вашу корзину!`, type:"success"})
       })
     },
 
@@ -137,8 +143,9 @@ export default {
   },
   watch: {
     thistimeurl() {
+      this.flag=true;
       this.countproduct = 1;
-      this.getProducts(this.$route.params);
+      this.getProducts(this.$route.params).then(() =>{this.flag=false;});
     },
   },
 };

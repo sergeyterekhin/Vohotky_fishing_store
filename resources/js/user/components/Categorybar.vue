@@ -2,7 +2,7 @@
 <div class="left_col" v-show="show">
     <nav id="main_catalog">
         <ul>
-			<li v-for="category in getCategories" :key=category.id>
+			<li v-for="category in getCategories" :key="category.id">
                 <router-link :to="{ 
                     name:'products', 
                     params:{ catalog:category.name_en}

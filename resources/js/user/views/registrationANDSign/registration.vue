@@ -3,7 +3,7 @@
   <div class="registration_form" v-if="showRegistrationform">
     <h1>Регистрация нового пользователя</h1>
     <div class="devider"></div>
-      <form class="forms" @submit.prevent="submit" >
+      <form class="forms">
         <div>Зарегистрированы на сайте? <router-link to="/auth">Войдите</router-link>.</div>
         <div class="item">
           <div class="title">E-mail</div>
@@ -55,7 +55,9 @@
         </div>
         <div class="devider"></div>
         <div class="item">
-          <input type="submit" value="Зарегистрироваться" />
+          <button :disabled="bflag" @click.prevent="submit">
+          <div v-if="!bflag">Зарегистрироваться</div>
+          <ring-loader v-else :size="'14px'" :color="'white'"></ring-loader></button>
         </div>
       </form>
     </div>
@@ -68,10 +70,15 @@
 
 <script>
 import { mapActions} from 'vuex'
+import RingLoader from 'vue-spinner/src/ClipLoader.vue';
 export default {
+  components:{
+    RingLoader
+  },
   data(){
     return{
       showRegistrationform:true,
+      bflag:false,
       errors:"",
       form:{
         email: "",
@@ -88,10 +95,13 @@ export default {
     }),
    
    submit(){
+     this.bflag=true;
      this.errors="";
       this.RegistrationUser(this.form).then(() => {
+        this.bflag=false;
       this.showRegistrationform=false;
       }).catch((e)=>{
+        this.bflag=false;
         this.errors=e.response.data;
       })
     }

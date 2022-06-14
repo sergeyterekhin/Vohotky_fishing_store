@@ -5,7 +5,7 @@ window.Vue = require('vue').default;
 import router_admin from './router';
 import store_admin from './store';
 
-axios.defaults.baseURL="http://127.0.0.1:8001/";
+axios.defaults.baseURL=process.env.MIX_APP_URL;
 
 Vue.config.productionTip=false
 store_admin.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {

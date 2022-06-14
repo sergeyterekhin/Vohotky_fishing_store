@@ -11,10 +11,24 @@
 @media all{
 footer{
     padding:20px 0;
-
+    height: 140px;
     margin-top: -100px;
     background-color:#0d5da3;
     color:white;
+   
+}
+
+#footer{
+ flex:0 0 auto;
+}
+
+#app{
+   display: flex;
+   flex-direction: column;
+}
+
+#contents{
+    flex:1 0 auto;
 }
 
 .f-basic{

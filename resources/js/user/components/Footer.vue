@@ -1,5 +1,5 @@
 <template>
-<footer>
+<footer id="myfooter">
 <div class="f-basic">
 <p class="f-p">© Магазин "В охотку"<br>
     <i class="fa-solid fa-phone"></i> +7 (913) 708-59-24<br>

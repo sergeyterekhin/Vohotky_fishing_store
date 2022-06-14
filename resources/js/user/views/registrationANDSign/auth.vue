@@ -2,7 +2,7 @@
   <main>
     <h1>Вход на сайт</h1>
     <div class="devider"></div>
-      <form class="forms" @submit.prevent="submit">
+      <form class="forms">
         <div> Еще не зарегистрированы на сайте? <router-link to="/registration">Зарегистрируйтесь</router-link>.</div>
         <div class="item">
           <div class="title">E-mail</div>
@@ -32,7 +32,9 @@
         </div>
         <div class="devider"></div>
         <div class="item">
-          <input type="submit" value="Войти на сайт" />
+          <button :disabled="bflag" @click.prevent="submit">
+          <div v-if="!bflag">Войти на сайт</div>
+          <ring-loader v-else :size="'14px'" :color="'white'"></ring-loader></button>
         </div>
       </form>
   </main>
@@ -40,12 +42,16 @@
 
 <script>
 import { mapActions } from 'vuex'
+import RingLoader from 'vue-spinner/src/ClipLoader.vue';
 export default {
   name: 'signin',
-  
+  components:{
+    RingLoader
+  },
   data(){
     return {
       errors:null,
+      bflag:false,
       form:{
         email: "",
         password: "",
@@ -60,9 +66,12 @@ export default {
     }),
    
    submit(){
+     this.bflag=true;
       this.AuthUser(this.form).then(() => {
+       this.bflag=false; 
       this.$router.replace({name: 'Home'})
       }).catch(()=>{
+        this.bflag=false;
         this.errors="Неправильный логин или пароль";
       })
 

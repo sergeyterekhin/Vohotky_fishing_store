@@ -4,8 +4,8 @@
    v-for="curentpage in listpage"
    :key="curentpage.label"
    @click="selectpage(curentpage.label)"
-   :class="{active:curentpage.label==page}"
-   :disabled="curentpage.url==null || curentpage.label==page"
+   :class="{active:curentpage.label==page.page}"
+   :disabled="curentpage.url==null || curentpage.label==page.page"
    >{{curentpage.label}}</button>
   </div>
 </template>
@@ -17,10 +17,11 @@ export default {
   methods: {
     selectpage(page) {
         switch(page){
-           case "»": page=Number(this.page)+1; break;
-           case "«": page=Number(this.page)-1; break;
+           case "»": this.page.page=Number(this.page.page)+1; break;
+           case "«": this.page.page=Number(this.page.page)-1; break;
+           default: this.page.page=page; break;
         }
-      this.$emit("changepage", page);
+      this.$emit("changepage");
     }
   },
 };

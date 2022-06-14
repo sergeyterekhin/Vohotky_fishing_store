@@ -11,6 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -27,10 +34,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     M.Sidenav.init(document.querySelectorAll('.sidenav'));
-  }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    user: 'auth/user',
+    role: 'auth/role'
+  }))
 });
 
 /***/ }),
@@ -366,52 +378,65 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("header", [
+    _c("nav", [
+      _c("div", { staticClass: "nav-wrapper light-blue darken-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("ul", { staticClass: "right hide-on-med-and-down" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("li", [
+            _vm._v(_vm._s(_vm.user.name) + " (" + _vm._s(_vm.role) + ")"),
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", [
-      _c("nav", [
-        _c("div", { staticClass: "nav-wrapper light-blue darken-3" }, [
-          _c(
-            "a",
-            {
-              staticClass: "sidenav-trigger",
-              attrs: { href: "", "data-target": "slide-out" },
-            },
-            [_c("i", { staticClass: "material-icons" }, [_vm._v("menu")])]
-          ),
-          _vm._v(" "),
-          _c("a", { staticClass: "brand-logo center", attrs: { href: "/" } }, [
-            _c("img", {
-              attrs: {
-                width: "85",
-                height: "50",
-                src: "/img/logo.png",
-                alt: "",
-              },
-            }),
-          ]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "right hide-on-med-and-down" }, [
-            _c("li", [
-              _c("i", { staticClass: "material-icons" }, [_vm._v("person")]),
-            ]),
-            _vm._v(" "),
-            _c("li", [_vm._v("Сергей Олегович")]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "/" } }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("exit_to_app"),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
+    return _c(
+      "a",
+      {
+        staticClass: "sidenav-trigger",
+        attrs: { href: "", "data-target": "slide-out" },
+      },
+      [_c("i", { staticClass: "material-icons" }, [_vm._v("menu")])]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "brand-logo center", attrs: { href: "/" } }, [
+      _c("img", {
+        attrs: { width: "85", height: "50", src: "/img/logo.png", alt: "" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("person")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/" } }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("exit_to_app")]),
       ]),
     ])
   },
@@ -462,14 +487,9 @@ var render = function () {
                 _c(
                   "li",
                   [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "waves-effect",
-                        attrs: { to: "/adminVohotky/user" },
-                      },
-                      [_vm._v("Все")]
-                    ),
+                    _c("router-link", { attrs: { to: "/adminVohotky/user" } }, [
+                      _vm._v("Все"),
+                    ]),
                   ],
                   1
                 ),
@@ -479,10 +499,7 @@ var render = function () {
                   [
                     _c(
                       "router-link",
-                      {
-                        staticClass: "waves-effect",
-                        attrs: { to: "/adminVohotky/user" },
-                      },
+                      { attrs: { to: "/adminVohotky/user?sort=verificated" } },
                       [_vm._v("Верифицированные")]
                     ),
                   ],
@@ -495,8 +512,7 @@ var render = function () {
                     _c(
                       "router-link",
                       {
-                        staticClass: "waves-effect",
-                        attrs: { to: "/adminVohotky/user" },
+                        attrs: { to: "/adminVohotky/user?sort=noverificated" },
                       },
                       [_vm._v("Не верифицированные")]
                     ),
@@ -507,13 +523,157 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("li", [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "collapsible-body" }, [
+              _c("ul", [
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/category" } },
+                      [_vm._v("Просмотр всех")]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/add/category" } },
+                      [_vm._v("Создать новую")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("li", [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "collapsible-body" }, [
+              _c("ul", [
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/products" } },
+                      [_vm._v("Просмотр товаров сайта")]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/add/products" } },
+                      [_vm._v("Добавить товар")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("li", [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "collapsible-body" }, [
+              _c("ul", [
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/info/about" } },
+                      [_vm._v("О компании")]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/info/deliveryandpay" } },
+                      [_vm._v("Оплата и доставка")]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/info/contact" } },
+                      [_vm._v("Контакты")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("li", [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("div", { staticClass: "collapsible-body" }, [
+              _c("ul", [
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/orders?status=new" } },
+                      [_vm._v("Необработанные заказы")]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/orders?status=ready" } },
+                      [_vm._v("Ожидают покупателя")]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/adminVohotky/orders?status=elder" } },
+                      [_vm._v("Завершенные заказы")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
         ]),
       ]
     ),
@@ -532,116 +692,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "collapsible-header" }, [
-        _c("b", [_vm._v("Категории")]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapsible-body" }, [
-        _c("ul", [
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Просмотр всех"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Создать новую"),
-            ]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "collapsible-header" }, [
+      _c("b", [_vm._v("Категории")]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "collapsible-header" }, [
-        _c("b", [_vm._v("Товары")]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapsible-body" }, [
-        _c("ul", [
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Все"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Показать по категории"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Добавить новый"),
-            ]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "collapsible-header" }, [
+      _c("b", [_vm._v("Товары")]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "collapsible-header" }, [
-        _c("b", [_vm._v("Данные сайта")]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapsible-body" }, [
-        _c("ul", [
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("О компании"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Оплата и доставка"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Контакты"),
-            ]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "collapsible-header" }, [
+      _c("b", [_vm._v("Данные сайта")]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "collapsible-header" }, [
-        _c("b", [_vm._v("Заказы")]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapsible-body" }, [
-        _c("ul", [
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Новые заказы"),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { staticClass: "waves-effect", attrs: { href: "#!" } }, [
-              _vm._v("Старые заказы"),
-            ]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "collapsible-header" }, [
+      _c("b", [_vm._v("Заказы")]),
     ])
   },
 ]

@@ -14,7 +14,7 @@
         <tbody v-for="product_cart in getCart" :key="product_cart.id">
           <tr class="item">
             <td class="img">
-                <img :src="product_cart.image_name" />
+                <img :src="product_cart.image_name==null ? '/storage/products/none.png' : `/storage/products/${product_cart.image_name}`" />
             </td>
             <td class="">
               <router-link
@@ -70,20 +70,28 @@
       <div class="contain">
         <div class="form_toggle">
           <div class="form_toggle-item item-1">
-            <input id="fid-1" type="radio" name="radio" value="off" checked />
+            <input id="fid-1" type="radio" name="radio" value="online"  v-model="payment" />
             <label for="fid-1">Онлайн</label>
           </div>
           <div class="form_toggle-item item-2">
-            <input id="fid-2" type="radio" name="radio" value="on" />
+            <input id="fid-2" type="radio" name="radio" value="inshop" v-model="payment" />
             <label for="fid-2">В Магазине</label>
           </div>
           <p>Выберите тип оплаты</p>
         </div>
 
         <form class="forms">
-          <input class="item submit" type="submit" value="Отправить заказ" />
+          <button class="item submit" :disabled="bflag" @click.prevent="addToOrder">
+            <div v-if="!bflag">Отправить заказ</div>
+            <ring-loader v-else :size="'14px'" :color="'white'"></ring-loader>
+            </button>
         </form>
       </div>
+    </div>
+    <div class="ShowCart" v-else-if="code!=null">
+        <h1>Заказ успешно оформлен!</h1>
+        <p>Спасибо, что совершили у нас покупку!</p><p> Мы свяжемся с вами по указаному при регистрации номеру телефона, когда товар будет готов к выдаче.</p>
+        <p>При получении скажите этот код продавцу:</p> <b style="font-size:30px">{{this.code}}</b>
     </div>
     <div class="ShowCart" v-else>
         <h1>Корзина товаров</h1>
@@ -94,9 +102,17 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import RingLoader from 'vue-spinner/src/ClipLoader.vue';
 export default {
   name: "Cart",
-  created() {},
+  components:{RingLoader},
+  data(){
+    return{
+      bflag:false,
+      code:null,
+      payment:"inshop"
+    }
+  },
   computed: {
     ...mapGetters({
       getCart: "cart/getProductinCart",
@@ -109,7 +125,27 @@ export default {
       CartUserssend: "cart/CartUsers",
       deleteOnCartuser:"cart/deleteOnCarts",
       quan:"cart/updateCartsUser",
+      makeOrder:"cart/MakeOrder",
     }),
+
+    addToOrder(){
+      this.bflag=true;
+      this.makeOrder(this.payment).then((message)=>{
+        console.log(message);
+        switch (message.type) {
+          case 400: 
+          this.$notify({title: 'Ошибка', text: `Корзина пуста или сумма отрицательна`, type:"error"})
+          break;
+          case 401: 
+          this.$notify({title: 'Ошибка', text: `проблемы с оформлением заказа!`, type:"error"})
+          break;
+          case 200: 
+          this.code=message.message;
+          this.CartUserssend();
+          break;
+          default: break;} 
+        this.bflag=false;})
+    },
 
     deleteProductfromCart(id){
     this.deleteOnCartuser(id)
@@ -128,7 +164,7 @@ export default {
         if(product.quantity<5){
             let colvo=product.quantity+1;
         this.quan({'id' :product.id, 'quantity':colvo}).then(()=>{
-         product.quantity++;   
+         product.quantity++;
         }).catch((error)=> console.log(error));
         }
     }

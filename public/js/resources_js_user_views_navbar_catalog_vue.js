@@ -35,7 +35,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['h2text'],
   name: "Categorylist",
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     getCategories: 'category/getCategories'
@@ -230,7 +229,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.h2text))]),
+    _c("h1", [_vm._v("Категории")]),
     _vm._v(" "),
     _c(
       "ul",
@@ -257,7 +256,10 @@ var render = function () {
                 _vm._v(" "),
                 _c("img", {
                   attrs: {
-                    src: "/img/photonotfound.png",
+                    src:
+                      category.image_name == null
+                        ? "/storage/products/none.png"
+                        : "/storage/category/" + category.image_name,
                     width: "270",
                     height: "240",
                   },

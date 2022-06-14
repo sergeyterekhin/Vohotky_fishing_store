@@ -7,9 +7,9 @@
         <div class="collapsible-header"><b>Пользователи</b></div>
         <div class="collapsible-body">
           <ul>
-            <li><router-link to="/adminVohotky/user" class="waves-effect">Все</router-link></li>
-            <li><router-link to="/adminVohotky/user" class="waves-effect">Верифицированные</router-link></li>
-            <li><router-link to="/adminVohotky/user" class="waves-effect">Не верифицированные</router-link></li>
+            <li><router-link to="/adminVohotky/user">Все</router-link></li>
+            <li><router-link to="/adminVohotky/user?sort=verificated">Верифицированные</router-link></li>
+            <li><router-link to="/adminVohotky/user?sort=noverificated">Не верифицированные</router-link></li>
           </ul>
         </div>
       </li>
@@ -17,8 +17,8 @@
         <div class="collapsible-header"><b>Категории</b></div>
         <div class="collapsible-body">
           <ul>
-            <li><a class="waves-effect" href="#!">Просмотр всех</a></li>
-            <li><a class="waves-effect" href="#!">Создать новую</a></li>
+             <li><router-link to="/adminVohotky/category">Просмотр всех</router-link></li>
+             <li><router-link to="/adminVohotky/add/category">Создать новую</router-link></li>
           </ul>
         </div>
       </li>
@@ -26,9 +26,8 @@
         <div class="collapsible-header"><b>Товары</b></div>
         <div class="collapsible-body">
           <ul>
-            <li><a class="waves-effect" href="#!">Все</a></li>
-            <li><a class="waves-effect" href="#!">Показать по категории</a></li>
-            <li><a class="waves-effect" href="#!">Добавить новый</a></li>
+            <li><router-link to="/adminVohotky/products">Просмотр товаров сайта</router-link></li>
+            <li><router-link to="/adminVohotky/add/products">Добавить товар</router-link></li>
           </ul>
         </div>
       </li>
@@ -36,9 +35,9 @@
         <div class="collapsible-header"><b>Данные сайта</b></div>
         <div class="collapsible-body">
           <ul>
-            <li><a class="waves-effect" href="#!">О компании</a></li>
-            <li><a class="waves-effect" href="#!">Оплата и доставка</a></li>
-            <li><a class="waves-effect" href="#!">Контакты</a></li>
+            <li><router-link to="/adminVohotky/info/about">О компании</router-link></li>
+            <li><router-link to="/adminVohotky/info/deliveryandpay">Оплата и доставка</router-link></li>
+            <li><router-link to="/adminVohotky/info/contact">Контакты</router-link></li>
           </ul>
         </div>
       </li>
@@ -46,8 +45,9 @@
         <div class="collapsible-header"><b>Заказы</b></div>
         <div class="collapsible-body">
           <ul>
-            <li><a class="waves-effect" href="#!">Новые заказы</a></li>
-            <li><a class="waves-effect" href="#!">Старые заказы</a></li>
+             <li><router-link to="/adminVohotky/orders?status=new">Необработанные заказы</router-link></li>
+             <li><router-link to="/adminVohotky/orders?status=ready">Ожидают покупателя</router-link></li>
+             <li><router-link to="/adminVohotky/orders?status=elder">Завершенные заказы</router-link></li>
           </ul>
         </div>
       </li>  

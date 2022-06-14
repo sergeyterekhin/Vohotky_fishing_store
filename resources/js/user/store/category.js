@@ -9,8 +9,8 @@ export default{
         },
     },
     actions:{
-        ajaxCategoriesFromDB(context){
-            axios.get("/api/category").then(responce =>{
+     ajaxCategoriesFromDB(context){
+            axios.get("/api/categoryproduct").then(responce =>{
                 context.commit('setCategories',responce.data.categories)
             })
             .catch(error => console.log("Ошибка!",error))

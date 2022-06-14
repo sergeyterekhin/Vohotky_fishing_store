@@ -8,9 +8,9 @@
           <p>В данном разделе можно управлять пользователями, которые зарегистрировались на сайте</p>
         </div>
         <div class="card-action center">
-          <router-link to="/adminVohotky/user" class="waves-effect light-blue darken-3 btn-large" >Все</router-link>
-          <router-link to="/adminVohotky/user" class="waves-effect light-blue darken-3 btn-large" >Верифицированные</router-link>
-          <router-link to="/adminVohotky/user" class="waves-effect light-blue darken-3 btn-large" >Не Верифицированные</router-link>
+          <router-link to="/adminVohotky/user" class=" light-blue darken-3 btn-large" >Все</router-link>
+          <router-link to="/adminVohotky/user?sort=verificated" class=" light-blue darken-3 btn-large" >Верифицированные</router-link>
+          <router-link to="/adminVohotky/user?sort=noverificated" class=" light-blue darken-3 btn-large" >Не Верифицированные</router-link>
         </div>
       </div>
       <div class="card ">
@@ -19,8 +19,8 @@
           <p>В данном разделе можно добавить новую категорию. Данная категория появится на сайте и можно будет задать её товарам в разделе "Товары"</p>
         </div>
         <div class="card-action  center">
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Просмотр всех</a>
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Создать новую</a>
+          <router-link to="/adminVohotky/category" class=" light-blue darken-3 btn-large" >Посмотреть все категории</router-link>
+          <router-link to="/adminVohotky/add/category" class=" light-blue darken-3 btn-large" >Создать новую</router-link>
         </div>
       </div>
       <div class="card ">
@@ -29,9 +29,8 @@
           <p>В данном разделе можно добавить новые товары или удалить старые. Если новому товару нужна новая категория, следует её добавить в разделе "Категории товаров"</p>
         </div>
         <div class="card-action  center">
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Все</a>
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Верифицированные</a>
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Не верифицированные</a>
+          <router-link to="/adminVohotky/products" class=" light-blue darken-3 btn-large" >Просмотр товаров сайта</router-link>
+          <router-link to="/adminVohotky/add/products" class=" light-blue darken-3 btn-large" >Добавить товар</router-link>
         </div>
       </div>
       <div class="card ">
@@ -40,9 +39,9 @@
           <p>В данном разделе можно изменить содержимое вкладок сайта "О компании", "Оплата и доставка", "Контакты"</p>
         </div>
         <div class="card-action  center">
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">О компании</a>
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Оплата и доставка</a>
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Контакты</a>
+         <router-link to="/adminVohotky/info/about" class=" light-blue darken-3 btn-large" >О компании</router-link>
+         <router-link to="/adminVohotky/info/deliveryandpay" class=" light-blue darken-3 btn-large" >Оплата и доставка</router-link>
+         <router-link to="/adminVohotky/info/contact" class=" light-blue darken-3 btn-large" >Контакты</router-link>
         </div>
       </div>
       <div class="card ">
@@ -51,8 +50,9 @@
           <p>В данном разделе можно смотреть поступившие заказы от пользователей.</p>
         </div>
         <div class="card-action  center">
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Новые заказы</a>
-          <a class="waves-effect light-blue darken-3 btn-large" href="#">Старые заказы</a>
+           <router-link to="/adminVohotky/orders?status=new" class=" light-blue darken-3 btn-large">Необработанные заказы</router-link>
+           <router-link to="/adminVohotky/orders?status=ready" class=" light-blue darken-3 btn-large">Ожидают покупателя</router-link>
+           <router-link to="/adminVohotky/orders?status=elder" class=" light-blue darken-3 btn-large">Завершенные заказы</router-link>
         </div>
       </div>
     </div>

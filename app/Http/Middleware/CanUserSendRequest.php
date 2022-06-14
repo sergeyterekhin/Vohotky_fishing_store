@@ -17,7 +17,7 @@ class CanUserSendRequest
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->role=="admin"){
+        if ($request->user() && $request->user()->role=="admin"){
         return $next($request);
         }
         else

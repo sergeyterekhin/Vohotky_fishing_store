@@ -1,10 +1,49 @@
 header, main, footer {
 padding-left: 300px;
 }
-  
+
+#pagin_user .active{
+background-color: #1565c0;
+}
+#warn{
+color: rgb(194, 28, 28);
+}
+
+.card-action a.vkladka{
+  color: black;
+  padding:17px;
+}
+
+.card-action a.vkladka:hover{
+  background-color: #f3f3f3;
+
+}
+
+.card-action a.vkladka.active{
+  color: white;
+  background-color: #0277bd;
+  border: 3px solid #0277bd;
+}
+
+#search_object button i {
+  font-size:29px;
+  margin-top:15px;
+}
+#search_object button:hover:not(:disabled){
+  color:blue;
+  cursor: pointer;
+}
+
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid rgb(255, 0, 0);
+    box-shadow: 0 1px 0 0 rgb(255, 0, 0);
+  }
+
 @media only screen and (max-width : 992px) {
 header, main, footer {
 padding-left: 0;
 }
 }
+
             

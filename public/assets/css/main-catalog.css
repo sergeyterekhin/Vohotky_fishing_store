@@ -180,7 +180,7 @@
     section.goods_set>.more {
         display: block;
         position: absolute;
-        top: 61px;
+        top: 25px;
         right: 0;
         color: #888;
     }
@@ -250,6 +250,8 @@
     .pagination button {
         color: black;
         float: left;
+        border: 0;
+        background-color: white;
         padding: 8px 16px;
         text-decoration: none;
     }
@@ -628,7 +630,7 @@ form.forms .item .input input {
     border-width: 0;
 }
 
-form.forms input[type=submit] {
+form.forms button {
     display: inline-block;
     color: #ffffff;
     font-size: 14px;
@@ -647,11 +649,11 @@ form.forms input[type=submit] {
     transition: background-color 0.3s;
 }
 
-form.forms input[type=submit]:hover {
+form.forms button:hover:not(:disabled) {
     background-color: #0062bd;
 }
 
-form.forms input[type=submit]:active {
+form.forms button:active:not(:disabled) {
     background-color: #000;
 }
 
@@ -673,3 +675,18 @@ form.forms .item .input input:disabled {
 color: rgb(15, 173, 15);
 font-weight: bold;
 }
+
+@media all{
+    @media all and (max-width: 640px){
+    body #content h1{font-size:26px;line-height:26px;margin-bottom:12px;padding-bottom:12px;padding-right:24px;}
+    }
+    }
+    table.order-list{border-collapse:collapse;width:100%;color:#333;}
+    table.order-list td,table.order-list th{border:1px solid #eee;width:18%;max-width:300px;padding:4px;}
+    table.order-list  th{background-color:#eee;text-align:center;vertical-align:middle;height:30px;}
+    table.order-list tr:hover td{background-color:#fafafa;}
+    table.order-list .center{text-align:center;}
+    table.order-list .right{text-align:right;}
+    table.order-list .number,table.order-list .date,table.order-list .sum{position:relative;width:10%;min-width:30px;max-width:100px;cursor:pointer;}
+    table.order-list .goods-info{cursor:pointer;}
+    table.order-list .status{cursor:pointer;}

@@ -10,9 +10,10 @@ const routes=[
         component: () => import('./views/index.vue')
     },
     {
-        path:"/about",
-        name: 'About',
-        component: () => import('./views/navbar/about.vue')
+        path:"/info/:pginform",
+        name: 'Pageinfo',       
+        component: () => import('./views/navbar/Pageinfo.vue'),
+        meta:{pginform:true}
     },
     {
         path:"/auth",
@@ -44,11 +45,7 @@ const routes=[
         component: () => import('./views/registrationANDSign/profile.vue'),
         meta:{requiresAuth:true}
     },
-    {
-        path:"/deliveryandpay",
-        name: 'delivery',
-        component: () => import('./views/navbar/deliverypay.vue')
-    },
+    
     {
         path:"/cart",
         name: 'cart',
@@ -56,9 +53,16 @@ const routes=[
         meta:{requiresAuth:true}
     },
     {
-        path:"/contact",
-        name: 'contact',
-        component: () => import('./views/navbar/contact.vue'),
+        path:"/history",
+        name: 'history',
+        component: () => import('./views/History.vue'),
+        meta:{requiresAuth:true}
+    },
+    {
+        path:"/history/:code",
+        name: 'historyOne',
+        component: () => import('./views/HistoryOne.vue'),
+        meta:{requiresAuth:true}
     },
     {
         path:"/catalog/",
@@ -97,13 +101,20 @@ router.beforeEach((to, from, next) => {
       } 
     } 
 
+    if (to.matched.some(record => record.meta.pginform)) {
+        if(to.params.pginform!="about" && to.params.pginform!="deliveryandpay" && to.params.pginform!="contact"){
+            next({name:'PageNotFound',params:{pathMatch:['info',to.params.pginform]}})
+        }
+        } 
+
     if (to.matched.some(record => record.meta.requiresNoAuth)) {
     if (store.getters['auth/authenticated']) {
        next({name:'Home'})
       } 
     }
+    
+
     next()
     
   })
-
 export default router;

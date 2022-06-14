@@ -2,7 +2,7 @@
   <main>
     <div class="Remember" v-if="this.show==1">
     <h1>Восстановление пароля</h1>
-    <form class="forms" method="post" @submit.prevent="submit">
+    <form class="forms" method="post">
       <div class="item">
         <div class="title">E-mail</div>
         <div class="input">
@@ -17,7 +17,9 @@
       </div>
       <div class="devider"></div>
       <div class="item">
-        <input type="submit" value="Подтвердить" />
+        <button :disabled="bflag" @click.prevent="submit">
+          <div v-if="!bflag">Подтвердить</div>
+          <ring-loader v-else :size="'14px'" :color="'white'"></ring-loader></button>
       </div>
     </form>
     </div>
@@ -30,12 +32,17 @@
 
 <script>
 import { mapActions } from "vuex";
+import RingLoader from 'vue-spinner/src/ClipLoader.vue';
 export default {
+  components:{
+    RingLoader
+  },
   data() {
     return {
       errors:"",
       email: "",
       show: 1,
+      bflag:false
     };
   },
   methods: {
@@ -43,11 +50,14 @@ export default {
       RememberPassword: "auth/sendEmailforChangePassword",
     }),
     submit() {
+      this.bflag=true
       if(this.email=="") this.errors="Заполните все поля"
       else
       this.RememberPassword({email:this.email}).then(() => {
       this.show=2;
+      this.bflag=false;
       }).catch((e)=>{
+        this.bflag=false;
         this.errors="Пользователь не найден"
       })
     },

@@ -1,8 +1,15 @@
 <template>
   <main>
+    <div id="mobile_user_nav">
+        <ul>
+            <li><router-link to="/info/about">Об этом магазине</router-link></li>
+            <li><router-link to="/history">История заказов</router-link></li>
+            <li><a @click.prevent="signOut">Выйти из аккаунта</a></li>
+        </ul>
+    </div>
     <h1>Профиль</h1>
     <div class="devider"><p v-if="this.showRegistrationform">Данные успешно изменены!</p></div>
-    <form class="forms" @submit.prevent="submit">
+    <form class="forms">
       <div class="item">
         <div class="title">E-mail</div>
         <div class="input">
@@ -49,7 +56,9 @@
 
       <div class="devider"></div>
       <div class="item">
-        <input type="submit" value="Сохранить" />
+        <button :disabled="bflag" @click.prevent="submit">
+          <div v-if="!bflag">Сохранить изменения</div>
+          <ring-loader v-else :size="'14px'" :color="'white'"></ring-loader></button>
       </div>
     </form>
   </main>
@@ -57,9 +66,14 @@
 
 <script>
 import { mapActions,mapGetters } from 'vuex'
+import RingLoader from 'vue-spinner/src/ClipLoader.vue';
 export default {
+  components:{
+    RingLoader
+  },
   data(){
     return{
+      bflag:false,
       showRegistrationform:false,
       errors:"",
       form:{
@@ -76,15 +90,25 @@ this.form.phone = this.user.phone
 
   methods:{
     ...mapActions({
-     changeUserData: 'auth/changeUserData'
+     changeUserData: 'auth/changeUserData',
+     signOutAction: 'auth/signOut'
     }),
+  
+  signOut(){
+  this.signOutAction().then(()=> {
+     this.$route.name!="Home" ? this.$router.replace({ name: 'Home'}) : this.$router.replace({ name: 'catalog'})
+      })
+  },
 
    submit(){
+     this.bflag=true;
      this.errors="";
      this.showRegistrationform=false;
       this.changeUserData(this.form).then(() => {
+        this.bflag=false;
       this.showRegistrationform=true;
       }).catch((e)=>{
+        this.bflag=false;
         this.errors=e.response.data;
       })
     }

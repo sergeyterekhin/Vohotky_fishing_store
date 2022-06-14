@@ -34,6 +34,30 @@ export default {
          }).catch((e)=>{
              console.log(e);
          })   
+        },
+
+        async MakeOrder({dispatch},payment){
+            let order={type:payment,status:false, data:null, total:null};
+            let quan=0;
+            let code=null;
+            await axios.get('api/carts/user').then((cart)=>{
+                order.data=cart.data.products_cart
+                order.total=cart.data.totalprice
+                quan=cart.data.totalquantity
+            });
+            if(quan<1 || quan==null || order.total<1 || order.total==null) return {type:400};
+            switch (payment) {
+                case 'inshop': order.status=true; break;
+                case 'online': 
+                
+                break;
+                default: order.status=false; break;
+            }
+            if (!order.status) return {type:401};
+            await axios.post('api/order',order).then((codes)=>{
+                code=codes.data
+            });
+            return {type:200,message:code};
         }
     },
 

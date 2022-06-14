@@ -2,7 +2,7 @@
   <div class="products_buy">
     <div
       class="goods_wrapper"
-      v-for="productdata in getProductsNew"
+      v-for="productdata in getProductsNew.data"
       :key="productdata.id"
     >
       <div class="goods">
@@ -15,7 +15,7 @@
             },
           }"
         >
-          <img :src="productdata.image_name" width="180" height="180" />
+          <img :src="productdata.image_name==null ? '/storage/products/none.png' : `/storage/products/${productdata.image_name}`" width="180" height="180" />
           <span class="name">{{ productdata.name }}</span>
         </router-link>
         <div class="price">
@@ -75,10 +75,6 @@ export default {
     },
 
     AddToCart(product) {
-      var modal = $modal({
-        title: "Добавлен в корзину",
-        content: `<p>Товар <strong>${product.name}</strong> Добавлен</p>`,
-      });
       var dataAdded = {
         id: product.id,
         name: product.name,
@@ -89,7 +85,7 @@ export default {
 
       this.addToCartuser(dataAdded).then(() => {
      // this.cart.push(dataAdded);
-      modal.showTime();
+       this.$notify({title: 'Товар добавлен!', text: `<b>${product.name}</b> добавлен в вашу корзину!`,type:'success'})
 
       }).catch((e)=>{
       console.log(e);

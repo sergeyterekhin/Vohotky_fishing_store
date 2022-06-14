@@ -35,7 +35,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['h2text'],
   name: "Categorylist",
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     getCategories: 'category/getCategories'
@@ -137,10 +136,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     AddToCart: function AddToCart(product) {
-      var modal = $modal({
-        title: "Добавлен в корзину",
-        content: "<p>\u0422\u043E\u0432\u0430\u0440 <strong>".concat(product.name, "</strong> \u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D</p>")
-      });
+      var _this = this;
+
       var dataAdded = {
         id: product.id,
         name: product.name,
@@ -150,7 +147,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       this.addToCartuser(dataAdded).then(function () {
         // this.cart.push(dataAdded);
-        modal.showTime();
+        _this.$notify({
+          title: 'Товар добавлен!',
+          text: "<b>".concat(product.name, "</b> \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0432\u0430\u0448\u0443 \u043A\u043E\u0440\u0437\u0438\u043D\u0443!"),
+          type: 'success'
+        });
       })["catch"](function (e) {
         console.log(e);
       });
@@ -200,13 +201,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      h2text: 'Основные категории'
+      goods_set_header: ['Вам могут понравиться', 'Хиты продаж']
     };
   },
   name: "Index",
@@ -215,13 +232,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Categorylist: _components_product_block_Categorylist_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mounted: function mounted() {
-    this.getProduct("?limit=4");
+    this.newProducts("?limit=4");
+    this.Rproducts(2);
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    getProductsNew: 'product/getNewProducts'
+    getNew: 'product/getProductsbyCategory',
+    getRproducts: 'product/getRproducts'
   })),
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)({
-    getProduct: 'product/ajaxnewProducts'
+    newProducts: 'product/NewProducts',
+    Rproducts: 'product/OtherProducts'
   }))
 });
 
@@ -450,7 +470,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.h2text))]),
+    _c("h1", [_vm._v("Категории")]),
     _vm._v(" "),
     _c(
       "ul",
@@ -477,7 +497,10 @@ var render = function () {
                 _vm._v(" "),
                 _c("img", {
                   attrs: {
-                    src: "/img/photonotfound.png",
+                    src:
+                      category.image_name == null
+                        ? "/storage/products/none.png"
+                        : "/storage/category/" + category.image_name,
                     width: "270",
                     height: "240",
                   },
@@ -517,7 +540,7 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "products_buy" },
-    _vm._l(_vm.getProductsNew, function (productdata) {
+    _vm._l(_vm.getProductsNew.data, function (productdata) {
       return _c("div", { key: productdata.id, staticClass: "goods_wrapper" }, [
         _c(
           "div",
@@ -539,7 +562,10 @@ var render = function () {
               [
                 _c("img", {
                   attrs: {
-                    src: productdata.image_name,
+                    src:
+                      productdata.image_name == null
+                        ? "/storage/products/none.png"
+                        : "/storage/products/" + productdata.image_name,
                     width: "180",
                     height: "180",
                   },
@@ -620,29 +646,98 @@ var render = function () {
   return _c(
     "main",
     [
-      _c("Categorylist", { attrs: { h2text: _vm.h2text } }),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "devider" }),
       _vm._v(" "),
       _c(
         "section",
         { staticClass: "goods_set" },
         [
-          _c("h2", [_vm._v("Новинки")]),
+          _c("h1", [_vm._v("Новинки")]),
           _vm._v(" "),
           _c(
             "router-link",
             { staticClass: "more", attrs: { to: "/catalog/news" } },
-            [_vm._v("Показать все новинки\n    ")]
+            [_vm._v("Показать все новинки")]
           ),
           _vm._v(" "),
-          _c("News", { attrs: { getProductsNew: _vm.getProductsNew } }),
+          _c("News", { attrs: { getProductsNew: _vm.getNew } }),
         ],
         1
       ),
+      _vm._v(" "),
+      _vm._l(_vm.getRproducts, function (value, name) {
+        return _c(
+          "section",
+          { key: value.id, staticClass: "goods_set" },
+          [
+            _c("h2", [_vm._v(_vm._s(_vm.goods_set_header[name]))]),
+            _vm._v(" "),
+            _c("News", { attrs: { getProductsNew: value } }),
+          ],
+          1
+        )
+      }),
     ],
-    1
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "banner_content" } }, [
+      _c("div", { attrs: { id: "banner" } }, [
+        _c("div", [
+          _c("img", {
+            staticClass: " ls-is-cached lazyloaded",
+            attrs: { src: "/img/bannerOleg.jpg" },
+          }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "advantages" }, [
+        _c("li", [
+          _c("img", {
+            staticClass: "lazyloaded",
+            attrs: {
+              src: "img/small-bnr-1.jpg",
+              alt: "",
+              height: "170",
+              width: "270",
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("img", {
+            staticClass: "lazyloaded",
+            attrs: {
+              src: "img/small-bnr-2.jpg",
+              alt: "",
+              height: "170",
+              width: "270",
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("img", {
+            staticClass: "lazyloaded",
+            attrs: {
+              src: "img/small-bnr-3.jpg",
+              alt: "",
+              height: "170",
+              width: "270",
+            },
+          }),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

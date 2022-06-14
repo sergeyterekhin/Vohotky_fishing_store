@@ -14,16 +14,19 @@ class RegController extends Controller
     public function __invoke(Request $request)
     {
 
-        //валидация
+        //валидация !!!СДЕЛАТЬ УНИКАЛЬНОСТЬ ЕМАИЛА
         $validator = Validator::make($request->all(), [
                 'name' => 'required|min:3',
-                'email' => 'required|email|unique:users,email',
-                'phone' => 'required|min:11|max:11|regex:/(8)[0-9]{10}/',
+                'email' => 'required|email',
+                'phone' => 'required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,11}(\s*)?$/',
                 'password' => 'required|min:6',   
         ]);
         //Если не прошло валидацию (Нужно узнать точную ошибку http)
         if ($validator->fails()){
             return response()->json($validator->errors(),418);
+        }
+        if(User::getEmailStatus($request->email)){
+            return response()->json(['email'=>['Такая почта уже существует'],],418); 
         }
 
         //Добавление пользователя в бд
@@ -39,6 +42,7 @@ class RegController extends Controller
         $data = [
             'name' => $user->name,
             'verification_code' => $user->verfication_code,
+            'url' => env('MIX_APP_URL')
         ];
         Mail::to($user->email)->send(new SignupEmail($data));
 
